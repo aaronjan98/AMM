@@ -10,16 +10,24 @@ describe('AMM', () => {
     deployer = accounts[0]
 
     const Token = await ethers.getContractFactory('Token')
-    token1 = Token.deploy('Jan Token', 'JAN', '1000000')
-    token2 = Token.deploy('USD Token', 'USD', '1000000')
+    token1 = await Token.deploy('Jan Token', 'JAN', '1000000')
+    token2 = await Token.deploy('USD Token', 'USD', '1000000')
 
     const AMM = await ethers.getContractFactory('AMM')
-    amm = await AMM.deploy()
+    amm = await AMM.deploy(token1.address, token2.address)
   })
 
   describe('Success', async () => {
     it('has an address', async () => {
       expect(await amm.address).to.not.equal(0x0)
+    })
+
+    it('tracks token1 address', async () => {
+      expect(await amm.token1()).to.equal(token1.address)
+    })
+
+    it('tracks token2 address', async () => {
+      expect(await amm.token2()).to.equal(token2.address)
     })
   })
 })
