@@ -12,4 +12,13 @@ contract AMM {
         token1 = _token1;
         token2 = _token2;
     }
+
+    function addLiquidity(
+        uint256 _token1Amount,
+        uint256 _token2Amount
+    ) external {
+        // Deposit Tokens
+        token1.transferFrom(msg.sender, address(this), _token1Amount);
+        token2.transferFrom(msg.sender, address(this), _token2Amount);
+    }
 }
