@@ -153,12 +153,38 @@ describe('AMM', () => {
       transaction = await amm.connect(investor1).swapToken1(tokens(1))
       result = await transaction.wait()
 
+      // Check swap event
+      await expect(transaction)
+        .to.emit(amm, 'Swap')
+        .withArgs(
+          investor1.address,
+          token1.address,
+          tokens(1),
+          token2.address,
+          estimate,
+          await amm.token1Balance(),
+          await amm.token2Balance(),
+          (
+            await ethers.provider.getBlock(
+              await ethers.provider.getBlockNumber()
+            )
+          ).timestamp
+        )
+
       // Check investor1 balance after swap
       balance = await token2.balanceOf(investor1.address)
       console.log(
         `Investor1 Token2 after swap: ${ethers.utils.formatEther(balance)}\n`
       )
       expect(estimate).to.equal(balance)
+
+      // Check AMM token balances are in sync
+      expect(await token1.balanceOf(amm.address)).to.equal(
+        await amm.token1Balance()
+      )
+      expect(await token2.balanceOf(amm.address)).to.equal(
+        await amm.token2Balance()
+      )
     })
   })
 })
