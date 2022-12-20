@@ -12,6 +12,10 @@ contract AMM {
     uint256 public token2Balance;
     uint256 public K;
 
+    uint256 public totalShares;
+    mapping(address => uint256) public shares;
+    uint256 constant PRECISION = 1e18;
+
     constructor(Token _token1, Token _token2) {
         token1 = _token1;
         token2 = _token2;
@@ -31,11 +35,20 @@ contract AMM {
             'failed to transfer token 2'
         );
 
-        // Issue Shares
-
         // Manage Pool
         token1Balance += _token1Amount;
         token2Balance += _token2Amount;
         K = token1Balance * token2Balance;
+
+        // Issue Shares
+        uint256 share;
+
+        // If first time adding liquidity, make share 100
+        if (totalShares == 0) {
+            share = 100 * PRECISION;
+        } else {}
+
+        totalShares += share;
+        shares[msg.sender] += share;
     }
 }

@@ -73,7 +73,11 @@ describe('AMM', () => {
       expect(await amm.token2Balance()).to.equal(amount)
       // TODO: write test to check for K
 
-      //
+      // Check deployer has 100 shares
+      expect(await amm.shares(deployer.address)).to.equal(tokens(100))
+
+      // Check pool has 100 shares
+      expect(await amm.totalShares()).to.equal(tokens(100))
     })
   })
 })
