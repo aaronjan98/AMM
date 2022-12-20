@@ -35,19 +35,28 @@ contract AMM {
             'failed to transfer token 2'
         );
 
-        // Manage Pool
-        token1Balance += _token1Amount;
-        token2Balance += _token2Amount;
-        K = token1Balance * token2Balance;
-
         // Issue Shares
         uint256 share;
 
         // If first time adding liquidity, make share 100
         if (totalShares == 0) {
             share = 100 * PRECISION;
-        } else {}
+        } else {
+            uint256 share1 = (totalShares * _token1Amount) / token1Balance;
+            uint256 share2 = (totalShares * _token2Amount) / token2Balance;
+            require(
+                (share1 / 1e3) == (share2 / 1e3),
+                'must provide equal token share amounts'
+            );
+            share = share1;
+        }
 
+        // Manage Pool
+        token1Balance += _token1Amount;
+        token2Balance += _token2Amount;
+        K = token1Balance * token2Balance;
+
+        // Update Shares
         totalShares += share;
         shares[msg.sender] += share;
     }
