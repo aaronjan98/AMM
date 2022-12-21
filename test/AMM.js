@@ -389,6 +389,15 @@ describe('AMM', () => {
       //     balance
       //   )} \n`
       // )
+
+      // LP should have 0 shares
+      expect(await amm.shares(liquidityProvider.address)).to.equal(0)
+
+      // Deployer should have 100 shares
+      expect(await amm.shares(deployer.address)).to.equal(shares(100))
+
+      // AMM Pool has 100 total shares
+      expect(await amm.totalShares()).to.equal(shares(100))
     })
   })
 })
