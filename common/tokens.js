@@ -5,10 +5,11 @@ const tokens = n => {
 }
 
 const ether = tokens
+const shares = tokens
 
 const wait = seconds => {
   const milliseconds = seconds * 1000
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-module.exports = { tokens, ether, wait }
+module.exports = { tokens, ether, shares, wait }
