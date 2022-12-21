@@ -338,6 +338,18 @@ describe('AMM', () => {
         )} \n`
       )
       expect(estimate).to.equal(balance)
+
+      /*********** Removing liquidity ***********/
+      console.log(
+        `AMM Token1 Balance: ${ethers.utils.formatEther(
+          await amm.token1Balance()
+        )} \n`
+      )
+      console.log(
+        `AMM Token2 Balance: ${ethers.utils.formatEther(
+          await amm.token2Balance()
+        )} \n`
+      )
     })
   })
 })
