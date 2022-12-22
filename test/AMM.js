@@ -373,6 +373,30 @@ describe('AMM', () => {
         .removeLiquidity(shares(50))
       await transaction.wait()
 
+      // Retrieve the withdrawal amounts for both tokens for withdrawal event
+      let { token1Amount, token2Amount } = await amm.calculateWithdrawAmount(
+        shares(50)
+      )
+
+      // Check removeLiquidity event
+      await expect(transaction)
+        .to.emit(amm, 'RemoveLiquidity')
+        .withArgs(
+          liquidityProvider.address,
+          shares(50),
+          token1.address,
+          token1Amount,
+          token2.address,
+          token2Amount,
+          await amm.token1Balance(),
+          await amm.token2Balance(),
+          (
+            await ethers.provider.getBlock(
+              await ethers.provider.getBlockNumber()
+            )
+          ).timestamp
+        )
+
       // Check LP balance after removing funds
       balance = await token1.balanceOf(liquidityProvider.address)
       expect(ethers.utils.formatEther(balance) | 0).to.equal(100033)
