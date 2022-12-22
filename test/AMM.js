@@ -1,5 +1,6 @@
 const { expect } = require('chai')
 const { ethers } = require('hardhat')
+const math = require('mathjs')
 const { tokens, shares } = require('../common/tokens.js')
 
 describe('AMM', () => {
@@ -85,7 +86,12 @@ describe('AMM', () => {
       // Check amount deposited into pool
       expect(await amm.token1Balance()).to.equal(amount)
       expect(await amm.token2Balance()).to.equal(amount)
-      // TODO: write test to check for K
+      // Check for K value
+      let k = math.multiply(
+        math.bignumber(`${amount}`),
+        math.bignumber(`${amount}`)
+      )
+      expect(await amm.K()).to.equal(ethers.BigNumber.from(k.toFixed()))
 
       // Check deployer has 100 shares
       expect(await amm.shares(deployer.address)).to.equal(shares(100))
