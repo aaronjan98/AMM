@@ -205,10 +205,10 @@ describe('AMM', () => {
       /*********** Investor 1 Swaps Again ***********/
 
       // Swap some more tokens to see what happens
-      balance = await token2.balanceOf(investor1.address)
+      let ogBalance = await token2.balanceOf(investor1.address)
       console.log(
         `Investor1 Token2 balance before swap: ${ethers.utils.formatEther(
-          balance
+          ogBalance
         )}\n`
       )
 
@@ -231,8 +231,11 @@ describe('AMM', () => {
           balance
         )} \n`
       )
-      // TODO: log original balance and add them together
-      // expect(estimate).to.equal(balance)
+      let est = math.subtract(
+        math.bignumber(`${balance}`),
+        math.bignumber(`${ogBalance}`)
+      )
+      expect(estimate).to.equal(ethers.BigNumber.from(est.toFixed()))
 
       // Check AMM token balances are in sync
       expect(await token1.balanceOf(amm.address)).to.equal(
