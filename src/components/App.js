@@ -7,13 +7,13 @@ import { ethers } from 'ethers'
 import Navigation from './Navigation'
 import Loading from './Loading'
 
+import { loadAccount, loadProvider } from '../store/interactions'
+
 // ABIs: Import your contract ABIs here
 // import TOKEN_ABI from '../abis/Token.json'
 
 // Config: Import your network config here
 // import config from '../config.json';
-
-import { setAccount } from '../store/reducers/provider'
 
 function App() {
   let account = '0x0...'
@@ -26,14 +26,10 @@ function App() {
 
   const loadBlockchainData = async () => {
     // Initiate provider
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const provider = await loadProvider(dispatch)
 
     // Fetch accounts
-    const accounts = await window.ethereum.request({
-      method: 'eth_requestAccounts',
-    })
-    const account = ethers.utils.getAddress(accounts[0])
-    dispatch(setAccount(account))
+    await loadAccount(dispatch)
 
     // Fetch account balance
     let balance = await provider.getBalance(account)
