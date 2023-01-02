@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Container } from 'react-bootstrap'
 import { ethers } from 'ethers'
 
 // Components
-import Navigation from './Navigation';
-import Loading from './Loading';
+import Navigation from './Navigation'
+import Loading from './Loading'
 
 // ABIs: Import your contract ABIs here
 // import TOKEN_ABI from '../abis/Token.json'
@@ -12,20 +13,27 @@ import Loading from './Loading';
 // Config: Import your network config here
 // import config from '../config.json';
 
+import { setAccount } from '../store/reducers/provider'
+
 function App() {
-  const [account, setAccount] = useState(null)
+  let account = '0x0...'
+
   const [balance, setBalance] = useState(0)
 
   const [isLoading, setIsLoading] = useState(true)
+
+  const dispatch = useDispatch()
 
   const loadBlockchainData = async () => {
     // Initiate provider
     const provider = new ethers.providers.Web3Provider(window.ethereum)
 
     // Fetch accounts
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+    const accounts = await window.ethereum.request({
+      method: 'eth_requestAccounts',
+    })
     const account = ethers.utils.getAddress(accounts[0])
-    setAccount(account)
+    dispatch(setAccount(account))
 
     // Fetch account balance
     let balance = await provider.getBalance(account)
@@ -39,24 +47,26 @@ function App() {
     if (isLoading) {
       loadBlockchainData()
     }
-  }, [isLoading]);
+  }, [isLoading])
 
-  return(
+  return (
     <Container>
       <Navigation account={account} />
 
-      <h1 className='my-4 text-center'>React Hardhat Template</h1>
+      <h1 className="my-4 text-center">React Hardhat Template</h1>
 
       {isLoading ? (
         <Loading />
       ) : (
         <>
-          <p className='text-center'><strong>Your ETH Balance:</strong> {balance} ETH</p>
-          <p className='text-center'>Edit App.js to add your code here.</p>
+          <p className="text-center">
+            <strong>Your ETH Balance:</strong> {balance} ETH
+          </p>
+          <p className="text-center">Edit App.js to add your code here.</p>
         </>
       )}
     </Container>
   )
 }
 
-export default App;
+export default App
