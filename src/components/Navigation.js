@@ -5,15 +5,17 @@ import Blockies from 'react-blockies'
 
 import logo from '../logo.png'
 
-import { loadAccount } from '../store/interactions'
+import { loadAccount, loadBalances } from '../store/interactions'
 
 const Navigation = () => {
   const account = useSelector(state => state.provider.account)
+  const tokens = useSelector(state => state.tokens.contracts)
 
   const dispatch = useDispatch()
 
   const connectHandler = async () => {
-    await loadAccount(dispatch)
+    const account = await loadAccount(dispatch)
+    await loadBalances(tokens, account, dispatch)
   }
 
   return (

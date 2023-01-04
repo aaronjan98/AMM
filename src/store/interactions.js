@@ -62,14 +62,14 @@ export const loadAMM = async (provider, chainId, dispatch) => {
 }
 
 /******* LOAD BALANCES & SHARES *******/
-export const loadBalances = async (amm, tokens, account, dispatch) => {
+export const loadBalances = async (tokens, account, dispatch) => {
   const balance1 = await tokens[0].balanceOf(account)
   const balance2 = await tokens[1].balanceOf(account)
 
   dispatch(
     balancesLoaded([
-      ethers.utils.formatUnits(balance1.toString(), 'ether'),
-      ethers.utils.formatUnits(balance2.toString(), 'ether'),
+      ethers.utils.formatEther(balance1),
+      ethers.utils.formatEther(balance2),
     ])
   )
 }
