@@ -11,7 +11,5 @@ export const store = configureStore({
     amm,
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializationCheck: false,
-    }),
+    getDefaultMiddleware({ serializableCheck: false }),
 })

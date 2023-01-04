@@ -21,12 +21,16 @@ function App() {
     // Initiate provider
     const provider = await loadProvider(dispatch)
 
-    // Fetch current network's chainId (e.g. hardhat: 31337, kovan: 42)
+    // Fetch current network's chainId
     const chainId = await loadNetwork(provider, dispatch)
+
+    // Reload page when network changes
+    window.ethereum.on('chainChanged', () => {
+      window.location.reload()
+    })
 
     // Fetch current account from Metamask when changed
     window.ethereum.on('accountsChanged', async () => {
-      console.log('account changed')
       await loadAccount(dispatch)
     })
 

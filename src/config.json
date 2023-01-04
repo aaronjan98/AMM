@@ -9,5 +9,16 @@
     "amm": {
       "address": "0xB8765DD78581d09228e9c0fa8c71cEc6c3902229"
     }
+  },
+  "5": {
+    "le": {
+      "address": "0xB055C28406722796E54A458b4A44D552cF963120"
+    },
+    "usd": {
+      "address": "0xFfc2D05e40C3066A358F18D49a26D9DcfBa82cB9"
+    },
+    "amm": {
+      "address": "0x68BD04Bf18eA11ccC0aa536cdA86C9CE3B450861"
+    }
   }
 }
