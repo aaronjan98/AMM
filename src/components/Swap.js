@@ -9,6 +9,8 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import { ethers } from 'ethers'
 
+import { swap } from '../store/interactions'
+
 const Swap = () => {
   const [inputToken, setInputToken] = useState(null)
   const [outputToken, setOutputToken] = useState(null)
@@ -17,6 +19,7 @@ const Swap = () => {
 
   const [price, setPrice] = useState(0)
 
+  const provider = useSelector(state => state.provider.connection)
   const account = useSelector(state => state.provider.account)
 
   const tokens = useSelector(state => state.tokens.contracts)
@@ -24,6 +27,8 @@ const Swap = () => {
   const balances = useSelector(state => state.tokens.balances)
 
   const amm = useSelector(state => state.amm.contract)
+
+  const dispatch = useDispatch()
 
   const inputHandler = async e => {
     if (!inputToken || !outputToken) {
@@ -55,6 +60,24 @@ const Swap = () => {
     }
   }
 
+  const swapHandler = async e => {
+    e.preventDefault()
+
+    if (inputToken === outputToken) {
+      window.alert('Invalid Token Pair')
+      return
+    }
+
+    const _inputAmount = ethers.utils.parseEther(inputAmount)
+
+    // Swap token depending upon which one we're doing...
+    if (inputToken === 'LE') {
+      await swap(provider, amm, tokens[0], inputToken, _inputAmount, dispatch)
+    } else {
+      await swap(provider, amm, tokens[1], inputToken, _inputAmount, dispatch)
+    }
+  }
+
   const getPrice = async () => {
     if (inputToken === outputToken) {
       setPrice(0)
@@ -78,7 +101,10 @@ const Swap = () => {
     <div>
       <Card style={{ maxWidth: '450px' }} className="mx-auto px-4">
         {account ? (
-          <Form style={{ maxWidth: '450px', margin: '50px auto' }}>
+          <Form
+            onSubmit={swapHandler}
+            style={{ maxWidth: '450px', margin: '50px auto' }}
+          >
             <Row className="my-3">
               <div className="d-flex justify-content-between">
                 <Form.Label>
