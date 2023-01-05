@@ -28,7 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "ganache": "ganache-cli -p 9001 -a 20 -e 10000 -m 'egg cannon figure ketchup fall issue never share online shiver chief album'"
+    "ganache": "ganache --chain.chainId 31337 -p 9001 -a 20 -e 10000 -m 'egg cannon figure ketchup fall issue never share online shiver chief album'"
   },
   "author": "aaronjanovitch@gmail.com",
   "license": "ISC",

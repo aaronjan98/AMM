@@ -26,6 +26,7 @@ const Navigation = () => {
 
   const networkHandler = async e => {
     try {
+      // Switch to the selected network
       await ethereum.request({
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: e.target.value }],
@@ -34,7 +35,7 @@ const Navigation = () => {
       // This error code indicates that the chain has not been added to MetaMask.
       if (switchError.code === 4902) {
         try {
-          await ethereum.request({
+          await window.ethereum.request({
             method: 'wallet_addEthereumChain',
             params: [
               {
@@ -53,9 +54,6 @@ const Navigation = () => {
         )
       }
     }
-
-    // Update current network's chainId
-    await changeNetwork(chainId, dispatch)
   }
 
   return (
@@ -81,7 +79,7 @@ const Navigation = () => {
             <option value="0" disabled>
               Select Network
             </option>
-            <option value="0x539">Localhost 9001</option>
+            <option value="0x7A69">Localhost</option>
             <option value="0x5">Goerli</option>
           </Form.Select>
 
