@@ -1,10 +1,15 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 
 // Components
 import Navigation from './Navigation'
-import Loading from './Loading'
+import Tabs from './Tabs'
+import Swap from './Swap'
+import Deposit from './Deposit'
+import Withdraw from './Withdraw'
+import Charts from './Charts'
 
 import {
   loadProvider,
@@ -45,20 +50,20 @@ function App() {
 
   return (
     <Container>
-      <Navigation />
+      <HashRouter>
+        <Navigation />
 
-      <h1 className="my-4 text-center">React Hardhat Template</h1>
+        <hr />
 
-      {false ? (
-        <Loading />
-      ) : (
-        <>
-          <p className="text-center">
-            <strong>Your ETH Balance:</strong> ETH
-          </p>
-          <p className="text-center">Edit App.js to add your code here.</p>
-        </>
-      )}
+        <Tabs />
+
+        <Routes>
+          <Route exact path="/" element={<Swap />} />
+          <Route path="/deposit" element={<Deposit />} />
+          <Route path="/withdraw" element={<Withdraw />} />
+          <Route path="/charts" element={<Charts />} />
+        </Routes>
+      </HashRouter>
     </Container>
   )
 }
