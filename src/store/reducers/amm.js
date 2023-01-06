@@ -29,10 +29,15 @@ export const amm = createSlice({
       state.swapping.isSuccess = true
       state.swapping.transactionHash = action.payload
     },
+    swapFail: (state, action) => {
+      state.swapping.isSwapping = false
+      state.swapping.isSuccess = false
+      state.swapping.transactionHash = null
+    },
   },
 })
 
-export const { setContract, sharesLoaded, swapRequest, swapSuccess } =
+export const { setContract, sharesLoaded, swapRequest, swapSuccess, swapFail } =
   amm.actions
 
 export default amm.reducer
