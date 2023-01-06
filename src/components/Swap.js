@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row'
 import Spinner from 'react-bootstrap/Spinner'
 import { ethers } from 'ethers'
 
-import { swap } from '../store/interactions'
+import { swap, loadBalances } from '../store/interactions'
 
 const Swap = () => {
   const [inputToken, setInputToken] = useState(null)
@@ -82,6 +82,9 @@ const Swap = () => {
     } else {
       await swap(provider, amm, tokens[1], inputToken, _inputAmount, dispatch)
     }
+
+    await loadBalances(amm, tokens, account, dispatch)
+    await getPrice()
   }
 
   const getPrice = async () => {
