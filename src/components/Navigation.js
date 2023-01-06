@@ -6,7 +6,7 @@ import Blockies from 'react-blockies'
 
 import logo from '../logo.png'
 
-import { loadAccount, loadBalances, changeNetwork } from '../store/interactions'
+import { loadAccount, loadBalances } from '../store/interactions'
 
 import config from '../config.json'
 const { ethereum } = window
