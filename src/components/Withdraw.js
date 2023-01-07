@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
@@ -45,8 +45,14 @@ const Withdraw = () => {
     await loadBalances(amm, tokens, account)
 
     setShowAlert(true)
-    setAmount(0)
   }
+
+  // reset amount of shares inputted after successful withdraw
+  useEffect(() => {
+    if (isSuccess) {
+      setAmount(0)
+    }
+  }, [isSuccess])
 
   return (
     <div>
