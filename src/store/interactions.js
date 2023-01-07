@@ -1,4 +1,5 @@
 import { ethers } from 'ethers'
+import { store } from './store'
 import { setProvider, setNetwork, setAccount } from './reducers/provider'
 import { setContracts, setSymbols, balancesLoaded } from './reducers/tokens'
 import {
@@ -16,21 +17,23 @@ import TOKEN_ABI from '../abis/Token.json'
 import AMM_ABI from '../abis/AMM.json'
 import config from '../config.json'
 
-export const loadProvider = dispatch => {
+const { dispatch } = store
+
+export const loadProvider = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   dispatch(setProvider(provider))
 
   return provider
 }
 
-export const loadNetwork = async (provider, dispatch) => {
+export const loadNetwork = async provider => {
   const { chainId } = await provider.getNetwork()
   dispatch(setNetwork(chainId))
 
   return chainId
 }
 
-export const loadAccount = async dispatch => {
+export const loadAccount = async () => {
   const accounts = await window.ethereum.request({
     method: 'eth_requestAccounts',
   })
@@ -40,14 +43,14 @@ export const loadAccount = async dispatch => {
   return account
 }
 
-export const changeNetwork = async (chainId, dispatch) => {
+export const changeNetwork = async chainId => {
   dispatch(setNetwork(chainId))
 
   return chainId
 }
 
 /********** LOAD CONTRACTS ************/
-export const loadTokens = async (provider, chainId, dispatch) => {
+export const loadTokens = async (provider, chainId) => {
   const le = new ethers.Contract(
     config[chainId].le.address,
     TOKEN_ABI,
@@ -64,7 +67,7 @@ export const loadTokens = async (provider, chainId, dispatch) => {
   dispatch(setSymbols([await le.symbol(), await usd.symbol()]))
 }
 
-export const loadAMM = async (provider, chainId, dispatch) => {
+export const loadAMM = async (provider, chainId) => {
   const amm = new ethers.Contract(
     config[chainId].amm.address,
     AMM_ABI,
@@ -77,7 +80,7 @@ export const loadAMM = async (provider, chainId, dispatch) => {
 }
 
 /******* LOAD BALANCES & SHARES *******/
-export const loadBalances = async (amm, tokens, account, dispatch) => {
+export const loadBalances = async (amm, tokens, account) => {
   const balance1 = await tokens[0].balanceOf(account)
   const balance2 = await tokens[1].balanceOf(account)
 
@@ -93,13 +96,7 @@ export const loadBalances = async (amm, tokens, account, dispatch) => {
 }
 
 /************ ADD LIQUIDITY ***********/
-export const addLiquidity = async (
-  provider,
-  amm,
-  tokens,
-  amounts,
-  dispatch
-) => {
+export const addLiquidity = async (provider, amm, tokens, amounts) => {
   try {
     dispatch(depositRequest())
 
@@ -127,7 +124,7 @@ export const addLiquidity = async (
 }
 
 /**************** SWAP ****************/
-export const swap = async (provider, amm, token, symbol, amount, dispatch) => {
+export const swap = async (provider, amm, token, symbol, amount) => {
   try {
     dispatch(swapRequest())
 

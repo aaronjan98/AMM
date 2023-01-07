@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -37,8 +37,6 @@ const Swap = () => {
   const transactionHash = useSelector(
     state => state.amm.swapping.transactionHash
   )
-
-  const dispatch = useDispatch()
 
   const inputHandler = async e => {
     if (!inputToken || !outputToken) {
@@ -84,12 +82,12 @@ const Swap = () => {
 
     // Swap token depending upon which one we're doing...
     if (inputToken === 'LE') {
-      await swap(provider, amm, tokens[0], inputToken, _inputAmount, dispatch)
+      await swap(provider, amm, tokens[0], inputToken, _inputAmount)
     } else {
-      await swap(provider, amm, tokens[1], inputToken, _inputAmount, dispatch)
+      await swap(provider, amm, tokens[1], inputToken, _inputAmount)
     }
 
-    await loadBalances(amm, tokens, account, dispatch)
+    await loadBalances(amm, tokens, account)
     await getPrice()
 
     setShowAlert(true)

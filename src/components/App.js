@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 
@@ -20,14 +19,12 @@ import {
 } from '../store/interactions'
 
 function App() {
-  const dispatch = useDispatch()
-
   const loadBlockchainData = async () => {
     // Initiate provider
-    const provider = await loadProvider(dispatch)
+    const provider = await loadProvider()
 
     // Fetch current network's chainId
-    const chainId = await loadNetwork(provider, dispatch)
+    const chainId = await loadNetwork(provider)
 
     // Reload page when network changes
     window.ethereum.on('chainChanged', () => {
@@ -36,12 +33,12 @@ function App() {
 
     // Fetch current account from Metamask when changed
     window.ethereum.on('accountsChanged', async () => {
-      await loadAccount(dispatch)
+      await loadAccount()
     })
 
     // Initiate Contracts
-    await loadTokens(provider, chainId, dispatch)
-    await loadAMM(provider, chainId, dispatch)
+    await loadTokens(provider, chainId)
+    await loadAMM(provider, chainId)
   }
 
   useEffect(() => {

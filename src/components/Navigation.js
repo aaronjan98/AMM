@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -17,11 +17,9 @@ const Navigation = () => {
   const tokens = useSelector(state => state.tokens.contracts)
   const amm = useSelector(state => state.amm.contract)
 
-  const dispatch = useDispatch()
-
   const connectHandler = async () => {
-    const account = await loadAccount(dispatch)
-    await loadBalances(amm, tokens, account, dispatch)
+    const account = await loadAccount()
+    await loadBalances(amm, tokens, account)
   }
 
   const networkHandler = async e => {

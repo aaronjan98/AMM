@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -30,7 +30,6 @@ const Deposit = () => {
   const transactionHash = useSelector(
     state => state.amm.depositing.transactionHash
   )
-  const dispatch = useDispatch()
 
   const amountHandler = async e => {
     if (e.target.id === 'token1') {
@@ -62,15 +61,9 @@ const Deposit = () => {
     const _token1Amount = ethers.utils.parseEther(token1Amount)
     const _token2Amount = ethers.utils.parseEther(token2Amount)
 
-    await addLiquidity(
-      provider,
-      amm,
-      tokens,
-      [_token1Amount, _token2Amount],
-      dispatch
-    )
+    await addLiquidity(provider, amm, tokens, [_token1Amount, _token2Amount])
 
-    await loadBalances(amm, tokens, account, dispatch)
+    await loadBalances(amm, tokens, account)
 
     setShowAlert(true)
   }
