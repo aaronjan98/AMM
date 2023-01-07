@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
@@ -68,6 +68,14 @@ const Deposit = () => {
     setShowAlert(true)
   }
 
+  // reset amount input after successful deposit
+  useEffect(() => {
+    if (isSuccess) {
+      setToken1Amount(0)
+      setToken2Amount(0)
+    }
+  }, [isSuccess])
+
   return (
     <div>
       <Card style={{ maxWidth: '450px' }} className="mx-auto px-4">
@@ -87,8 +95,8 @@ const Deposit = () => {
                   min="0.0"
                   step="any"
                   id="token1"
-                  onChange={e => amountHandler(e)}
                   value={token1Amount === 0 ? '' : token1Amount}
+                  onChange={e => amountHandler(e)}
                 />
                 <InputGroup.Text
                   style={{ width: '100px' }}
@@ -109,8 +117,8 @@ const Deposit = () => {
                   placeholder="0.0"
                   step="any"
                   id="token2"
-                  onChange={e => amountHandler(e)}
                   value={token2Amount === 0 ? '' : token2Amount}
+                  onChange={e => amountHandler(e)}
                 />
                 <InputGroup.Text
                   style={{ width: '100px' }}
