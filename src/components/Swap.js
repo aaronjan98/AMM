@@ -112,6 +112,14 @@ const Swap = () => {
     }
   }, [inputToken, outputToken])
 
+  // reset input after successful swap
+  useEffect(() => {
+    if (isSuccess) {
+      setInputAmount(0)
+      setOutputAmount(0)
+    }
+  }, [isSuccess])
+
   return (
     <div>
       <Card style={{ maxWidth: '450px' }} className="mx-auto px-4">
@@ -140,6 +148,7 @@ const Swap = () => {
                   placeholder="0.0"
                   min="0.0"
                   step="any"
+                  value={inputAmount === 0 ? '' : inputAmount}
                   onChange={e => inputHandler(e)}
                   disabled={!inputToken}
                 />
