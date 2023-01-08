@@ -5,6 +5,7 @@ import { setContracts, setSymbols, balancesLoaded } from './reducers/tokens'
 import {
   setContract,
   sharesLoaded,
+  swapsLoaded,
   depositRequest,
   depositSuccess,
   depositFail,
@@ -141,6 +142,7 @@ export const removeLiquidity = async (provider, amm, shares) => {
     dispatch(withdrawFail())
   }
 }
+
 /**************** SWAP ****************/
 export const swap = async (provider, amm, token, symbol, amount) => {
   try {
@@ -165,4 +167,18 @@ export const swap = async (provider, amm, token, symbol, amount) => {
   } catch (error) {
     dispatch(swapFail())
   }
+}
+
+/********** LOAD ALL SWAPS ************/
+
+export const loadAllSwaps = async (provider, amm) => {
+  const block = await provider.getBlockNumber()
+
+  const swapStream = await amm.queryFilter('Swap', 0, block)
+  const swaps = swapStream.map(event => ({
+    hash: event.transactionHash,
+    args: event.args,
+  }))
+
+  dispatch(swapsLoaded(swaps))
 }
