@@ -30,13 +30,14 @@ const Charts = () => {
     <div>
       {provider && amm ? (
         <div>
-          <Chart
-            type="line"
-            options={options}
-            series={chart ? chart.series : series}
-            width="100%"
-            height="25%"
-          />
+          <div className="chart-container">
+            <Chart
+              type="line"
+              options={options}
+              series={chart ? chart.series : series}
+              className="chart"
+            />
+          </div>
 
           <hr />
 
