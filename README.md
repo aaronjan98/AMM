@@ -9,7 +9,7 @@
   </a>
 </p>
 
-> Automated Market Maker like Uniswap
+> Swap, Deposit, and Withdraw from a liquidity pool comprising of two Tokens.
 
 ### 🏠 [Homepage](https://github.com/aaronjan98/AMM)
 
@@ -23,8 +23,34 @@ npm install
 
 ## Usage
 
+- Run web server
+
 ```sh
-npm start
+npm run start
+```
+
+- Run local blockchain
+
+```sh
+npm run ganache
+```
+
+- Deploy Tokens and AMM contract
+
+```sh
+npx hardhat run scripts/deploy.js --network ganache
+```
+
+- Seed AMM with transactions to view reserve history chart
+
+```sh
+npx hardhat run scripts/seed.js --network ganache
+```
+
+- View hardhat/ganache accounts' Ether & token balances
+
+```sh
+npx hardhat run scripts/getBalances.js --network ganache
 ```
 
 ## Run tests
