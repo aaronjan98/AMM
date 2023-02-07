@@ -11,9 +11,13 @@
 
 > Swap, Deposit, and Withdraw from a liquidity pool comprising of two Tokens.
 
-### 🏠 [Homepage](https://github.com/aaronjan98/AMM)
+## Links
 
-### ✨ [Demo](https://firzv-niaaa-aaaad-qe2rq-cai.ic.fleek.co/)
+- 🏠 [Homepage](https://github.com/aaronjan98/AMM)
+- ✨ [Live Demo](https://firzv-niaaa-aaaad-qe2rq-cai.ic.fleek.co/)
+- [USD Token on goerli](https://goerli.etherscan.io/address/0xFfc2D05e40C3066A358F18D49a26D9DcfBa82cB9)
+- [Le Token on goerli](https://goerli.etherscan.io/address/0xB055C28406722796E54A458b4A44D552cF963120)
+- [AMM on goerli](https://goerli.etherscan.io/address/0x68BD04Bf18eA11ccC0aa536cdA86C9CE3B450861)
 
 ## Install
 
