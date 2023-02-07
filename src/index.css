@@ -17,12 +17,17 @@ body {
   background-color: rgb(255, 248, 220);
 }
 
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .alert {
-  max-width: 300px;
-  position: absolute;
-  bottom: 100px;
-  right: 100px;
+  max-width: 450px;
   padding: 50px;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .chart-container {

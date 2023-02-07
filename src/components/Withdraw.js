@@ -55,8 +55,8 @@ const Withdraw = () => {
   }, [isSuccess])
 
   return (
-    <div>
-      <Card style={{ maxWidth: '450px' }} className="mx-auto px-4 bisque">
+    <div className="card-container">
+      <Card style={{ width: '450px' }} className="mx-auto px-4 bisque">
         {account ? (
           <Form
             onSubmit={withdrawHandler}
