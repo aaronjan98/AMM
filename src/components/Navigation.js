@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Blockies from 'react-blockies'
 
-import logo from '../logo.png'
+import { ReactComponent as Logo } from '../flower.svg'
 
 import { loadAccount, loadBalances } from '../store/interactions'
 
@@ -56,23 +56,20 @@ const Navigation = () => {
 
   return (
     <Navbar className="my-3">
-      <img
-        alt="logo"
-        src={logo}
-        width="40"
-        height="40"
-        className="d-inline-block align-top mx-3"
-      />
-      <Navbar.Brand href="#">AJ's AMM</Navbar.Brand>
+      <Logo alt="logo" className="d-inline-block align-top mx-3" />
+      <Navbar.Brand style={{ color: '#0d6efd' }} href="#">
+        AJ's AMM
+      </Navbar.Brand>
 
       <Navbar.Toggle aria-controls="nav" />
       <Navbar.Collapse className="justify-content-end">
-        <div className="d-flex justify-content-end mt-3">
+        <div className="d-flex justify-content-end">
           <Form.Select
             aria-label="Network Selector"
             value={config[chainId] ? `0x${chainId.toString(16)}` : `0`}
             onChange={networkHandler}
             style={{ maxWidth: '200px', marginRight: '20px' }}
+            className="bisque"
           >
             <option value="0" disabled>
               Select Network
