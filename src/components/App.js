@@ -9,6 +9,7 @@ import Swap from './Swap'
 import Deposit from './Deposit'
 import Withdraw from './Withdraw'
 import Charts from './Charts'
+import NotificationBanner from './NotificationBanner'
 
 import {
   loadProvider,
@@ -47,6 +48,8 @@ function App() {
 
   return (
     <Container>
+      <NotificationBanner />
+
       <HashRouter>
         <Navigation />
 

@@ -47,3 +47,36 @@ a.demo {
   display: flex;
   width: 80px;
 }
+
+/* NotificationBanner */
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.notification-banner {
+  position: fixed;
+  left: calc(50% - 20%);
+  z-index: 1;
+  background-color: orange;
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px 20px 10px 0;
+  animation: slideInFromTop 0.7s ease-out;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
