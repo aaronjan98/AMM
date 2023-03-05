@@ -63,6 +63,14 @@ const Navigation = () => {
 
       <Navbar.Toggle aria-controls="nav" />
       <Navbar.Collapse className="justify-content-end">
+        <a
+          className="demo"
+          href="https://www.loom.com/share/cbc0c5ce73a144609cc2c13816b89087"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Demo
+        </a>
         <div className="d-flex justify-content-end">
           <Form.Select
             aria-label="Network Selector"

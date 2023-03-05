@@ -38,3 +38,9 @@ body {
   max-width: 900px;
   margin: 0 auto;
 }
+
+a.demo {
+  color: #0d6efd;
+  margin-right: 20px;
+  text-decoration: none;
+}
