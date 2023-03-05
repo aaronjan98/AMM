@@ -58,7 +58,7 @@ const Navigation = () => {
     <Navbar className="my-3">
       <Logo alt="logo" className="d-inline-block align-top mx-3" />
       <Navbar.Brand style={{ color: '#0d6efd' }} href="#">
-        AJ's AMM
+        Calyx AMM
       </Navbar.Brand>
 
       <Navbar.Toggle aria-controls="nav" />
@@ -74,7 +74,7 @@ const Navigation = () => {
             <option value="0" disabled>
               Select Network
             </option>
-            <option value="0x7A69">Localhost</option>
+            <option value={`0x${(31337).toString(16)}`}>Localhost 9001</option>
             <option value="0x5">Goerli</option>
           </Form.Select>
 
