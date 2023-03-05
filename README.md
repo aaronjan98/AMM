@@ -14,10 +14,16 @@
 ## Links
 
 - 🏠 [Homepage](https://github.com/aaronjan98/AMM)
-- ✨ [Live Demo](https://firzv-niaaa-aaaad-qe2rq-cai.ic.fleek.co/)
+- ✨ [Live Site](https://firzv-niaaa-aaaad-qe2rq-cai.ic.fleek.co/)
+- 📺 [Demo Video](https://www.loom.com/share/cbc0c5ce73a144609cc2c13816b89087)
 - [USD Token on goerli](https://goerli.etherscan.io/address/0xFfc2D05e40C3066A358F18D49a26D9DcfBa82cB9)
 - [Le Token on goerli](https://goerli.etherscan.io/address/0xB055C28406722796E54A458b4A44D552cF963120)
 - [AMM on goerli](https://goerli.etherscan.io/address/0x68BD04Bf18eA11ccC0aa536cdA86C9CE3B450861)
+
+### Note
+
+- You will need the tokens of the trading pair, `Le/USD`, to Swap, Deposit, and Withdraw. Please email me your wallet address at `aaronjanovitch@gmail.com` and I'll send you the tokens.
+- Also, you'll want to add the custom tokens on metamask so that you can see your balances and transactions. To do this you'll need the USD address, `0xFfc2D05e40C3066A358F18D49a26D9DcfBa82cB9`, and the Le address, `0xB055C28406722796E54A458b4A44D552cF963120`.
 
 ## Install
 
@@ -26,8 +32,6 @@ npm install
 ```
 
 ## Usage
-
-- **N.B.** You will need the tokens of the trading pair `Le/USD` to Swap, Deposit, and Withdraw. Please email me your wallet address at `aaronjanovitch@gmail.com` and I'll send you some.
 
 - Run web server
 
