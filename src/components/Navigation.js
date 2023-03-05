@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Blockies from 'react-blockies'
 
-import { ReactComponent as Logo } from '../flower.svg'
+import { ReactComponent as Logo } from '../assets/flower.svg'
 import { ReactComponent as RightArrow } from '../assets/arrow-up-right.svg'
 
 import { loadAccount, loadBalances } from '../store/interactions'
