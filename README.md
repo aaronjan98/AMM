@@ -27,6 +27,8 @@ npm install
 
 ## Usage
 
+- **N.B.** You will need the tokens of the trading pair `Le/USD` to Swap, Deposit, and Withdraw. Please email me your wallet address at `aaronjanovitch@gmail.com` and I'll send you some.
+
 - Run web server
 
 ```sh
