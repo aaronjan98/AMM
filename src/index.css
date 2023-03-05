@@ -41,6 +41,9 @@ body {
 
 a.demo {
   color: #0d6efd;
-  margin-right: 20px;
   text-decoration: none;
+  font-weight: 500;
+
+  display: flex;
+  width: 80px;
 }

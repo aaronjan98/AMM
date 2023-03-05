@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import Blockies from 'react-blockies'
 
 import { ReactComponent as Logo } from '../flower.svg'
+import { ReactComponent as RightArrow } from '../assets/arrow-up-right.svg'
 
 import { loadAccount, loadBalances } from '../store/interactions'
 
@@ -70,6 +71,7 @@ const Navigation = () => {
           target="_blank"
         >
           Demo
+          <RightArrow />
         </a>
         <div className="d-flex justify-content-end">
           <Form.Select
